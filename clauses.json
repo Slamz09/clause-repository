@@ -1,0 +1,17 @@
+const clauses = [
+  {
+    clause_type: "Indemnity",
+    contract_type: "SaaS",
+    party_role: "Customer",
+    industry: "Hospitality",
+    clause_text: "Vendor shall indemnify the customer against all third-party claims...",
+  },
+  {
+    clause_type: "Non-Conforming Waste",
+    contract_type: "Waste Services",
+    party_role: "Vendor",
+    industry: "Environmental Services",
+    clause_text: "Customer shall not deliver non-conforming or hazardous waste without written consent...",
+  },
+  // Add more clauses here
+];
