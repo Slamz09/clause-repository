@@ -2,25 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Clause Repository</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Legal Clause Repository</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #42f5bc;
+      font-family: 'consolas', 'monotype' ;
+      margin: 20px;
+    }
+
+    h1, h3 {
+      color: ##42f5bc;
+    }
+
+    input, select, textarea, button {
+      background-color: #111;
+      color: #42f5bc;
+      border: 1px solid #42f5bc;
+      padding: 6px;
+      margin: 5px 0;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #42f5bc;
+      opacity: 0.7;
+    }
+
+    button:hover, select:hover, input:hover, textarea:hover {
+      background-color: #222;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #42f5bc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #111;
+      color: #42f5bc;
+    }
+
+    .tag {
+      background-color: #080707;
+      border: 1px solid ##42f5bc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-right: 5px;
+      display: inline-block;
+    }
+
+    .delete-tag {
+      background: none;
+      border: none;
+      color: red;
+      margin-left: 5px;
+      cursor: pointer;
+    }
+
+    .action-dropdown {
+      background-color: #111;
+      color: #42f5bc;
+      border: 1px solid #42f5bc;
+    }
+
+    .starred {
+      color: #42f5bc;
+      font-weight: bold;
+    }
+
+    .filters select {
+      margin-right: 10px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <h1>Legal Clause Repository</h1>
-  
-   <input type="text" id="search-bar" placeholder="Search clause text..." />
 
+  <h1>Legal Clause Repository</h1>
+
+  <!-- Search bar -->
+  <input type="text" id="search-bar" placeholder="Search clause text..." />
+
+  <!-- Filters -->
   <div class="filters">
     <select id="filter-type">
       <option value="">All Clause Types</option>
-      <option value="Indemnity">Indemnity</option>
-      <option value="Non-Conforming Waste">Non-Conforming Waste</option>
+	  <option value="Audit">Audit</option>
+	<option value="Confidentiality">Confidentiality</option>
+	<option value="Dispute Resolution">Dispute Resolution</option>
+	<option value="Force Majeure">Force Majeure</option>
+	<option value="Governing Law">Governing Law</option>
+	<option value="Indemnity">Indemnity</option>
+	<option value="Intellectual Property">Intellectual Property</option>
+	<option value="Limitation of Liability">Limitation of Liability</option>
+	<option value="Non-Conforming Waste">Non-Conforming Waste</option>
+	<option value="Payment">Payment</option>
+	<option value="Warranty">Warranty</option>
+
     </select>
 
     <select id="filter-contract">
       <option value="">All Contract Types</option>
-      <option value="SaaS">SaaS</option>
-      <option value="Waste Services">Waste Services</option>
+<option value="">All Contract Types</option>
+<option value="Film License">Film License</option>
+<option value="Hotel Sales">Hotel Sales</option>
+<option value="MSA">MSA</option>
+<option value="NDA">NDA</option>
+<option value="SaaS">SaaS</option>
+<option value="SLA">SLA</option>
+<option value="Waste Services">Waste Services</option>
+
     </select>
 
     <select id="filter-role">
@@ -28,8 +129,27 @@
       <option value="Customer">Customer</option>
       <option value="Vendor">Vendor</option>
     </select>
+
+    <select id="filter-tags">
+      <option value="">All Tags</option>
+      <option value="Legal">Legal</option>
+      <option value="Business">Business</option>
+      <option value="Risk">Risk</option>
+      <option value="Operational">Operational</option>
+    </select>
   </div>
 
+  <h3>Add New Clause</h3>
+  <form id="add-clause-form">
+    <input type="text" id="new-clause-type" placeholder="Clause Type" required />
+    <input type="text" id="new-contract-type" placeholder="Contract Type" required />
+    <input type="text" id="new-party-role" placeholder="Party Role" required />
+    <input type="text" id="new-industry" placeholder="Industry Context" required />
+    <textarea id="new-clause-text" placeholder="Clause Text" rows="4" required></textarea>
+    <button type="submit">Add Clause</button>
+  </form>
+
+  <!-- Clause Table -->
   <table id="clause-table">
     <thead>
       <tr>
@@ -37,14 +157,17 @@
         <th>Contract Type</th>
         <th>Party Role</th>
         <th>Industry</th>
+        <th>Tags</th>
         <th>Clause Text</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <!-- JS will populate this -->
+      <!-- JS will populate rows here -->
     </tbody>
   </table>
 
   <script src="script.js"></script>
+
 </body>
 </html>
