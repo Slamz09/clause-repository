@@ -5,31 +5,31 @@
   <title>Legal Clause Repository</title>
   <style>
     body {
-      background-color: #000;
-      color: #42f5bc;
-      font-family: 'consolas', 'monotype' ;
+      background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+      font-family: 'consolas', 'monotype';
       margin: 20px;
+      color: #42f5bc;
     }
 
     h1, h3 {
-      color: ##42f5bc;
+      color: #42f5bc;
     }
 
     input, select, textarea, button {
-      background-color: #111;
-      color: #42f5bc;
-      border: 1px solid #42f5bc;
+      background-color: #e0dede;
+      color: #111;
+      border: 1px solid #e0dede;
       padding: 6px;
       margin: 5px 0;
     }
 
     input::placeholder, textarea::placeholder {
-      color: #42f5bc;
+      color: #111;
       opacity: 0.7;
     }
 
     button:hover, select:hover, input:hover, textarea:hover {
-      background-color: #222;
+      background-color: #;
     }
 
     table {
@@ -42,19 +42,24 @@
       border: 1px solid #42f5bc;
       padding: 10px;
       text-align: left;
+      vertical-align: top;
+      word-wrap: break-word;
+      white-space: normal;
+      max-width: 500px;
     }
 
     th {
-      background-color: #111;
+      background-color: #;
       color: #42f5bc;
     }
 
     .tag {
-      background-color: #080707;
-      border: 1px solid ##42f5bc;
+      background-color: #e0dede;
+      color: #111;
+      border: 1px solid #111c;
       padding: 2px 6px;
-      border-radius: 4px;
-      margin-right: 5px;
+      border-radius: 2px;
+      margin-right: 2px;
       display: inline-block;
     }
 
@@ -67,9 +72,9 @@
     }
 
     .action-dropdown {
-      background-color: #111;
-      color: #42f5bc;
-      border: 1px solid #42f5bc;
+      background-color: #e0dede;
+      color: #111;
+      border: 1px solid #111c;
     }
 
     .starred {
@@ -84,88 +89,142 @@
     textarea {
       width: 100%;
     }
+    
+    /* NEW: Hide/Show tabs */
+    #repository-page, #negotiation-page {
+      margin-top: 20px;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Legal Clause Repository</h1>
 
-  <!-- Search bar -->
-  <input type="text" id="search-bar" placeholder="Search clause text..." />
-
-  <!-- Filters -->
-  <div class="filters">
-    <select id="filter-type">
-      <option value="">All Clause Types</option>
-	  <option value="Audit">Audit</option>
-	<option value="Confidentiality">Confidentiality</option>
-	<option value="Dispute Resolution">Dispute Resolution</option>
-	<option value="Force Majeure">Force Majeure</option>
-	<option value="Governing Law">Governing Law</option>
-	<option value="Indemnity">Indemnity</option>
-	<option value="Intellectual Property">Intellectual Property</option>
-	<option value="Limitation of Liability">Limitation of Liability</option>
-	<option value="Non-Conforming Waste">Non-Conforming Waste</option>
-	<option value="Payment">Payment</option>
-	<option value="Warranty">Warranty</option>
-
-    </select>
-
-    <select id="filter-contract">
-      <option value="">All Contract Types</option>
-<option value="">All Contract Types</option>
-<option value="Film License">Film License</option>
-<option value="Hotel Sales">Hotel Sales</option>
-<option value="MSA">MSA</option>
-<option value="NDA">NDA</option>
-<option value="SaaS">SaaS</option>
-<option value="SLA">SLA</option>
-<option value="Waste Services">Waste Services</option>
-
-    </select>
-
-    <select id="filter-role">
-      <option value="">All Party Roles</option>
-      <option value="Customer">Customer</option>
-      <option value="Vendor">Vendor</option>
-    </select>
-
-    <select id="filter-tags">
-      <option value="">All Tags</option>
-      <option value="Legal">Legal</option>
-      <option value="Business">Business</option>
-      <option value="Risk">Risk</option>
-      <option value="Operational">Operational</option>
-    </select>
+  <!-- Navigation Buttons -->
+  <div id="nav-bar">
+    <button onclick="showRepository()">Clause Repository</button>
+    <button onclick="showNegotiationAssistant()">Negotiation Assistant</button>
   </div>
 
-  <h3>Add New Clause</h3>
-  <form id="add-clause-form">
-    <input type="text" id="new-clause-type" placeholder="Clause Type" required />
-    <input type="text" id="new-contract-type" placeholder="Contract Type" required />
-    <input type="text" id="new-party-role" placeholder="Party Role" required />
-    <input type="text" id="new-industry" placeholder="Industry Context" required />
-    <textarea id="new-clause-text" placeholder="Clause Text" rows="4" required></textarea>
-    <button type="submit">Add Clause</button>
-  </form>
+  <!-- Clause Repository Tab -->
+  <div id="repository-page">
 
-  <!-- Clause Table -->
-  <table id="clause-table">
-    <thead>
-      <tr>
-        <th>Clause Type</th>
-        <th>Contract Type</th>
-        <th>Party Role</th>
-        <th>Industry</th>
-        <th>Tags</th>
-        <th>Clause Text</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- JS will populate rows here -->
-    </tbody>
-  </table>
+    <!-- Search bar -->
+    <input type="text" id="search-bar" placeholder="Search clause text..." />
+
+    <!-- Filters -->
+    <div class="filters">
+      <select id="filter-type">
+        <option value="">All Clause Types</option>
+        <option value="Audit">Audit</option>
+        <option value="Confidentiality">Confidentiality</option>
+        <option value="Dispute Resolution">Dispute Resolution</option>
+        <option value="Force Majeure">Force Majeure</option>
+        <option value="Governing Law">Governing Law</option>
+        <option value="Indemnity">Indemnity</option>
+        <option value="Intellectual Property">Intellectual Property</option>
+        <option value="Limitation of Liability">Limitation of Liability</option>
+        <option value="Non-Conforming Waste">Non-Conforming Waste</option>
+		 <option value="Site Conditions">Site Conditions</option>
+		   <option value="Subcontracting">Subcontracting</option>
+		 <option value="Term/Termination">Term/Termination</option>
+        <option value="Payment">Payment</option>
+        <option value="Warranty">Warranty</option>
+      </select>
+
+      <select id="filter-contract">
+        <option value="">All Contract Types</option>
+        <option value="Film License">Film License</option>
+        <option value="Hotel Sales">Hotel Sales</option>
+        <option value="MSA">MSA</option>
+        <option value="NDA">NDA</option>
+        <option value="SaaS">SaaS</option>
+        <option value="SLA">SLA</option>
+        <option value="Waste Services">Waste Services</option>
+      </select>
+
+      <select id="filter-role">
+        <option value="">All Party Roles</option>
+        <option value="Customer">Customer</option>
+        <option value="Vendor">Vendor</option>
+      </select>
+
+      <select id="filter-tags">
+        <option value="">All Tags</option>
+        <option value="Legal">Legal</option>
+        <option value="Business">Business</option>
+        <option value="Risk">Risk</option>
+        <option value="Operational">Operational</option>
+      </select>
+
+      <button id="toggle-favorites">Show Favorites Only</button>
+    </div>
+
+    <!-- Add New Clause Form -->
+    <h3>Add New Clause</h3>
+    <form id="add-clause-form">
+      <input type="text" id="new-clause-type" placeholder="Clause Type" required />
+      <input type="text" id="new-contract-type" placeholder="Contract Type" required />
+      <input type="text" id="new-party-role" placeholder="Party Role" required />
+      <input type="text" id="new-industry" placeholder="Industry Context" required />
+      <textarea id="new-clause-text" placeholder="Clause Text" rows="4" required></textarea>
+      <button type="submit">Add Clause</button>
+    </form>
+
+    <!-- Clause Table -->
+    <table id="clause-table">
+      <thead>
+        <tr>
+          <th>Clause Type</th>
+          <th>Contract Type</th>
+          <th>Party Role</th>
+          <th>Industry</th>
+          <th>Tags</th>
+          <th>Clause Text</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JS will populate rows here -->
+      </tbody>
+    </table>
+
+  </div>
+
+  <!-- Negotiation Assistant Tab -->
+  <div id="negotiation-page" style="display:none;">
+    <h3>Leverage Analyzer</h3>
+    <form id="analyze-form">
+      <select id="contract-type" required>
+        <option value="">Select Contract Type</option>
+        <option value="SaaS">SaaS</option>
+        <option value="MSA">MSA</option>
+        <option value="License">License</option>
+		 <option value="Field Services Agreement">Field Services Agreement</option>
+		  <option value="Transportation">Transportation</option>
+		  <option value="Waste Services Agreement">Waste Services Agreement</option>
+      </select>
+      <select id="party-role-analyze" required>
+        <option value="">Select Party Role</option>
+        <option value="Customer">Customer</option>
+        <option value="Vendor">Vendor</option>
+      </select>
+<input type="number" id="contract-value" placeholder="Estimated Contract Value" required />
+
+<textarea id="input-clause-text" placeholder="Paste Clause Text Here..." rows="6" required></textarea>
+
+<button type="submit">Analyze Clause</button>
+
+    </form>
+    <div id="leverage-result"></div>
+
+    <h3>Upload Playbook (Optional)</h3>
+    <input type="file" id="playbook-upload" accept=".txt">
+
+    <h3>Redline Suggestions</h3>
+    <div id="suggestions-output"></div>
+  </div>
 
   <script src="script.js"></script>
 
